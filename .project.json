@@ -1,0 +1,20 @@
+{
+  "generation": [
+    {
+      "templateId": "ui5template.emptyMobileProjectKapsel",
+      "templateVersion": "1.28.1",
+      "dateTimeStamp": "Tue, 11 Oct 2016 08:04:35 GMT"
+    }
+  ],
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "projectType": [
+    "com.sap.webide.hybrid.cordova",
+    "sap.watt.uitools.ide.fiori"
+  ]
+}
