@@ -13,12 +13,44 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 	 * @memberOf GPSTracker.view.gpsTracker
 	 */
 	createContent: function(oController) {
-		return new sap.m.Page({
-			title: "Title",
-			content: [
-
-			]
+		var aData;
+		$.ajax({
+			type: "GET",
+			url: "https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/GPSTrack?$format=json",
+			dataType: 'json',
+			async: false,
+			success: function(data) {
+				aData = data.d.results;
+			}
 		});
+		var oMat = new sap.ui.commons.text().bindProperty("text","MAT");
+		var oLat = new sap.ui.commons.TextView().bindProperty("text", "LAT");
+		var oLong = new sap.ui.commons.TextView().bindProperty("text", "LONG");
+
+		var oTable = new sap.ui.table.Table({
+			title: "ULU",
+			visibleRowCount: 7,
+			selectionMode: sap.ui.table.SelectionMode.Single
+		});
+
+		var oColumn = new sap.ui.table.Column({
+			label: new sap.ui.commons.Label({
+				text: "LATITUDINE"
+			}),
+			template: oLat,
+			width: "100px"
+		});
+		oTable.addColumn(oColumn);
+		
+		
+var oModel = new sap.ui.model.json.JSONModel(); 
+oModel.setData({modelData: aData});
+oTable.setModel(oModel);
+oTable.bindRows("/modelData");
+
+
+oTable.sort(oTable.getColumns()[3]);
+
 	}
 
 });
