@@ -32,15 +32,31 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		oModel = new sap.ui.model.odata.ODataModel("https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/",false);
 		oModel.setHeaders({"content-type" : "application/json;charset=UTF-8"});*/
 
-		
 		var map;
 		var oModel=oController.getoModel();
+		//OFFILNEMODE
+		/*var oModel = new sap.ui.model.json.JSONModel({
+			row: [{
+				MAT: 1,
+				LAT: "45.4708097",
+				LONG: "9.2058543"
+			}, {
+				MAT: 2,
+				LAT: "45.4747447",
+				LONG: "9.1925423"
+			},{
+				MAT: 3,
+				LAT: "45.4381627",
+				LONG: "9.1518543"
+			}]
+		});
+		sap.ui.getCore().setModel(oModel);*/
+		//OFFILNEMODE
 		var oMat = new sap.ui.commons.TextView().bindProperty("text", "MAT");
 		var oLat = new sap.ui.commons.TextView().bindProperty("text", "LAT");
 		var oLong = new sap.ui.commons.TextView().bindProperty("text", "LONG");
 
-		
-		map	 = new google.maps.Map(document.getElementById('map'), {
+		map = new google.maps.Map(document.getElementById('map'), {
 			center: {
 				lat: 45.4628328,
 				lng: 9.107692
@@ -48,11 +64,13 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			scrollwheel: true,
 			zoom: 8
 		});
-		var marker = new google.maps.Marker({map:null,position:null})
-		
+		var marker = new google.maps.Marker({
+			map: null,
+			position: null
+		})
 
 		var oTable = new sap.ui.table.Table({
-			title: "ULU",
+			//title: "ULU",
 			visibleRowCount: 7,
 			selectionMode: sap.ui.table.SelectionMode.Single
 		});
@@ -88,10 +106,11 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			modelData: aData
 		});*/
 		oTable.setModel(oController.oModel);
-
-		//oTable.setModel(oModel);
 		oTable.bindRows("/GPSTrack");
-
+		//OFFLINEMODE
+		//oTable.setModel(oModel);
+		//oTable.bindRows("/row");
+		//OFFLINEMODE
 		oTable.sort(oTable.getColumns()[3]);
 
 		/*	function setMarker(lat, long) {
