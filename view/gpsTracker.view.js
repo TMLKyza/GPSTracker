@@ -35,10 +35,8 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		var sUrl = "/aziendasuperfiga/mainPKG/XS/Service/GPSTrack.xsodata/";
 		var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 		sap.ui.getCore().setModel(oModel);
-		var map;
 		var marker;
-		var longi;
-		var lati;
+		var map;
 		var oMat = new sap.ui.commons.TextView().bindProperty("text", "MAT");
 		var oLat = new sap.ui.commons.TextView().bindProperty("text", "LAT");
 		var oLong = new sap.ui.commons.TextView().bindProperty("text", "LONG");
@@ -93,35 +91,41 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 				position: oPosition,
 				map: map
 			});
-		}
-
+		}*/
 		oTable.attachRowSelectionChange(function(oEvent) {
 			var currentRowContext = oEvent.getParameter("rowContext");
-			var Long = oModel.getProperty("LONG", currentRowContext);
-			var Lat = oModel.getProperty("LAT", currentRowContext);
-			setMarker(Lat, Long);
+			var long = oModel.getProperty("LONG", currentRowContext);
+			var lat = oModel.getProperty("LAT", currentRowContext);
+			oController.setMarker(lat, long, map, marker);
 		});
 
-		/*	function setMarkerLoop() {
-			for (var i = 0; i < Object.keys(aData).length; i++) {
-				longi = aData[i].LONG;
-				lati = aData[i].LAT;
-				setMarker(lati, longi);
-			}
-		}*/
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: {
+				lat: 45.4628328,
+				lng: 9.107692
+			},
+			scrollwheel: true,
+			zoom: 8
 
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: {
-					lat: 45.4628328,
-					lng: 9.107692
-				},
-				scrollwheel: true,
-				zoom: 8
-			});
-			/*marker = new google.maps.Marker({position: null,
-    map: map});
-			setMarkerLoop();
+		});
+		/*debugger;
+		var oData = new sap.ui.model.json.JSONModel();
+		oData.setData({
+			modelData: oModel
+		});
+
+		var longi;
+		longi = oData[0].LAT;
+		debugger;
+		/*for (var i = 0; i < Object.keys(oModel).length; i++) {
+			debugger;
+			var longi = oModel[i].LONG;
+			var lati = oModel[i].LAT;
+			oController.setMarker(lati, longi, map, marker);
+			debugger;
 		}*/
+		/*marker = new google.maps.Marker({position: null,
+    map: map});*/
 		return oTable;
 	}
 });

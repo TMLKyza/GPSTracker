@@ -1,13 +1,20 @@
 sap.ui.controller("GPSTracker.view.gpsTracker", {
 
-	/**
-	 * Called when a controller is instantiated and its View controls (if available) are already created.
-	 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-	 * @memberOf GPSTracker.view.gpsTracker
-	 */
-	//	onInit: function() {
-	//
-	//	},
+	setMarker: function(lat, long, map, marker) {
+			var oPosition = new google.maps.LatLng(lat, long);
+			marker = new google.maps.Marker({
+				position: oPosition,
+				map: map
+			});
+		}
+		/**
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 * @memberOf GPSTracker.view.gpsTracker
+		 */
+		//	onInit: function() {
+		//
+		//	},
 
 	/**
 	 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
