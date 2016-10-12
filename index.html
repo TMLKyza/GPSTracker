@@ -4,19 +4,14 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
 
-		<script src="resources/sap-ui-core.js"
-				id="sap-ui-bootstrap"
-				data-sap-ui-libs="sap.m"
+		<script id='sap-ui-bootstrap'
+		src='https://sapui5.hana.ondemand.com/resources/sap-ui-core.js'
+				data-sap-ui-libs='sap.m,sap.ui.core,sap.ui.commons,sap.ui.table'
 				data-sap-ui-resourceroots='{"GPSTracker": "./"}'
 				data-sap-ui-theme="sap_bluecrystal">
 		</script>
-		<script id='sap-ui-bootstrap' 
-        src='/sap/ui5/1/resources/sap-ui-core.js'  
-        data-sap-ui-theme='sap_goldreflection'  
-        data-sap-ui-libs='sap.ui.core,sap.ui.commons,sap.ui.table'>
-    	</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
-		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAwED3-dEhWpgbF1O5dydUeZXiNUcYcA4&callback=initMap" async defer></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript">
 		  /*=====================================================================
@@ -37,7 +32,6 @@
 			return false;
 		  };
 		</script>
-
 		<script>
 				function getUrlParameterName(sParam)
 				{
@@ -63,7 +57,7 @@
 					app.addPage(page);
 					app.placeAt("content");
 				}
-				//commento test
+				
 				window.onload = function() {
 					if (window.cordova || getUrlParameterName("companionbuster")) {
 						jQuery.sap.require("GPSTracker.devapp");
@@ -83,5 +77,6 @@
 	</head>
 	<body class="sapUiBody" role="application">
 		<div id="content"></div>
-	</body>
+		<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAwED3-dEhWpgbF1O5dydUeZXiNUcYcA4&callback=initMap" async defer></script>
+			--></body>
 </html>

@@ -13,8 +13,14 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 	 * @memberOf GPSTracker.view.gpsTracker
 	 */
 	createContent: function(oController) {
+		/*return new sap.m.Page({
+			title: "Title",
+			content: [
+			]
+		});*/
+		
 		var aData;
-		$.ajax({
+		jQuery.ajax({
 			type: "GET",
 			url: "https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/GPSTrack?$format=json",
 			dataType: 'json',
@@ -23,7 +29,14 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 				aData = data.d.results;
 			}
 		});
-		var oMat = new sap.ui.commons.text().bindProperty("text","MAT");
+		/*var oModel;
+		oModel = new sap.ui.model.odata.ODataModel("https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/",false);
+		oModel.setHeaders({"content-type" : "application/json;charset=UTF-8"});*/
+		var map;
+		var marker;
+		var longi;
+		var lati;
+		var oMat = new sap.ui.commons.TextView().bindProperty("text", "MAT");
 		var oLat = new sap.ui.commons.TextView().bindProperty("text", "LAT");
 		var oLong = new sap.ui.commons.TextView().bindProperty("text", "LONG");
 
@@ -41,16 +54,55 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			width: "100px"
 		});
 		oTable.addColumn(oColumn);
-		
-		
-var oModel = new sap.ui.model.json.JSONModel(); 
-oModel.setData({modelData: aData});
-oTable.setModel(oModel);
-oTable.bindRows("/modelData");
 
+		var oColumn2 = new sap.ui.table.Column({
+			label: new sap.ui.commons.Label({
+				text: "LONGITUDE"
+			}),
+			template: oLong,
+			width: "100px"
+		});
+		oTable.addColumn(oColumn2);
 
-oTable.sort(oTable.getColumns()[3]);
+		var oColumn3 = new sap.ui.table.Column({
+			label: new sap.ui.commons.Label({
+				text: "Matricola"
+			}),
+			template: oMat,
+			width: "100px"
+		});
+		oTable.addColumn(oColumn3);
 
+		var oModel = new sap.ui.model.json.JSONModel(); 
+	    oModel.setData({modelData: aData});
+	    oTable.setModel(oModel);
+
+		//oTable.setModel(oModel);
+		oTable.bindRows("/modelData");
+
+		oTable.sort(oTable.getColumns()[3]);
+
+		/*	function setMarkerLoop() {
+			for (var i = 0; i < Object.keys(aData).length; i++) {
+				longi = aData[i].LONG;
+				lati = aData[i].LAT;
+				setMarker(lati, longi);
+			}
+		}
+
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {
+					lat: 45.4628328,
+					lng: 9.107692
+				},
+				scrollwheel: true,
+				zoom: 8
+			});
+			/*marker = new google.maps.Marker({position: null,
+    map: map});
+			setMarkerLoop();
+		}*/
+		return oTable;
 	}
-
 });
