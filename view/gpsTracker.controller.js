@@ -10,14 +10,14 @@ sap.ui.controller("GPSTracker.view.gpsTracker", {
 	 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 	 * @memberOf GPSTracker.view.gpsTracker
 	 */
-	
+	 
 	getoModel: function() {
 		var sUrl = "/aziendasuperfiga/mainPKG/XS/Service/GPSTrack.xsodata/";
 		var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 		sap.ui.getCore().setModel(oModel);
 		return oModel;
 	}
-
+ 
 	/**
 	 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 	 * (NOT before the first rendering! onInit() is used for that one!).

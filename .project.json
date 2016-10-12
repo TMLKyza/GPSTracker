@@ -29,5 +29,17 @@
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
   },
-  "hybrid": {}
+  "hybrid": {
+    "FacadeConfig": {
+      "cordova-plugin-device-orientation": false,
+      "accelerometer": {},
+      "compass": {},
+      "bFacade": true
+    }
+  },
+  "hcpdeploy": {
+    "account": "p1942218403trial",
+    "name": "gpstrackerapp",
+    "lastVersionWeTriedToDeploy": "1.0.0"
+  }
 }
