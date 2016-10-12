@@ -27,7 +27,7 @@
 			var idx = url.lastIndexOf("/");
 			if (idx > -1) {
 			  url = url.substring(idx + 1);
-			}//lin
+			}
 			alert("ERROR in " + url + " (line #" + line + ")\n" + msg);
 			console.error(msg);
 			return false;
@@ -58,7 +58,6 @@
 					app.addPage(page);
 					app.placeAt("content");
 				}
-				// fkhf
 				window.onload = function() {
 					if (window.cordova || getUrlParameterName("companionbuster")) {
 						jQuery.sap.require("GPSTracker.devapp");
