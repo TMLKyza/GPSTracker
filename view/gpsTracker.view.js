@@ -18,7 +18,6 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			content: [
 			]
 		});*/
-
 		/*var aData;
 		jQuery.ajax({
 			type: "GET",
@@ -32,23 +31,31 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		/*var oModel;
 		oModel = new sap.ui.model.odata.ODataModel("https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/",false);
 		oModel.setHeaders({"content-type" : "application/json;charset=UTF-8"});*/
-		var sUrl = "/aziendasuperfiga/mainPKG/XS/Service/GPSTrack.xsodata/";
-		var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
-		sap.ui.getCore().setModel(oModel);
+
+		
 		var map;
-		var marker;
-		var longi;
-		var lati;
+		var oModel=oController.getoModel();
 		var oMat = new sap.ui.commons.TextView().bindProperty("text", "MAT");
 		var oLat = new sap.ui.commons.TextView().bindProperty("text", "LAT");
 		var oLong = new sap.ui.commons.TextView().bindProperty("text", "LONG");
+
+		
+		map	 = new google.maps.Map(document.getElementById('map'), {
+			center: {
+				lat: 45.4628328,
+				lng: 9.107692
+			},
+			scrollwheel: true,
+			zoom: 8
+		});
+		var marker = new google.maps.Marker({map:null,position:null})
+		
 
 		var oTable = new sap.ui.table.Table({
 			title: "ULU",
 			visibleRowCount: 7,
 			selectionMode: sap.ui.table.SelectionMode.Single
 		});
-
 		var oColumn = new sap.ui.table.Column({
 			label: new sap.ui.commons.Label({
 				text: "LATITUDINE"
@@ -80,7 +87,7 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		/*oModel.setData({
 			modelData: aData
 		});*/
-		oTable.setModel(oModel);
+		oTable.setModel(oController.oModel);
 
 		//oTable.setModel(oModel);
 		oTable.bindRows("/GPSTrack");
@@ -93,35 +100,31 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 				position: oPosition,
 				map: map
 			});
-		}
-
+		}*/
 		oTable.attachRowSelectionChange(function(oEvent) {
 			var currentRowContext = oEvent.getParameter("rowContext");
-			var Long = oModel.getProperty("LONG", currentRowContext);
-			var Lat = oModel.getProperty("LAT", currentRowContext);
-			setMarker(Lat, Long);
+			var long = oModel.getProperty("LONG", currentRowContext);
+			var lat = oModel.getProperty("LAT", currentRowContext);
+			oController.setMarker(lat, long, map, marker);
+		});
+		/*debugger;
+		var oData = new sap.ui.model.json.JSONModel();
+		oData.setData({
+			modelData: oModel
 		});
 
-		/*	function setMarkerLoop() {
-			for (var i = 0; i < Object.keys(aData).length; i++) {
-				longi = aData[i].LONG;
-				lati = aData[i].LAT;
-				setMarker(lati, longi);
-			}
+		var longi;
+		longi = oData[0].LAT;
+		debugger;
+		/*for (var i = 0; i < Object.keys(oModel).length; i++) {
+			debugger;
+			var longi = oModel[i].LONG;
+			var lati = oModel[i].LAT;
+			oController.setMarker(lati, longi, map, marker);
+			debugger;
 		}*/
-
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: {
-					lat: 45.4628328,
-					lng: 9.107692
-				},
-				scrollwheel: true,
-				zoom: 8
-			});
-			/*marker = new google.maps.Marker({position: null,
-    map: map});
-			setMarkerLoop();
-		}*/
+		/*marker = new google.maps.Marker({position: null,
+    map: map});*/
 		return oTable;
 	}
 });
