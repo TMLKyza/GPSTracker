@@ -18,7 +18,7 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			content: [
 			]
 		});*/
-		
+
 		var aData;
 		jQuery.ajax({
 			type: "GET",
@@ -73,14 +73,31 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		});
 		oTable.addColumn(oColumn3);
 
-		var oModel = new sap.ui.model.json.JSONModel(); 
-	    oModel.setData({modelData: aData});
-	    oTable.setModel(oModel);
+		var oModel = new sap.ui.model.json.JSONModel();
+		oModel.setData({
+			modelData: aData
+		});
+		oTable.setModel(oModel);
 
 		//oTable.setModel(oModel);
 		oTable.bindRows("/modelData");
 
 		oTable.sort(oTable.getColumns()[3]);
+
+		function setMarker(lat, long) {
+			var oPosition = new google.maps.LatLng(lat, long);
+			marker = new google.maps.Marker({
+				position: oPosition,
+				map: map
+			});
+		}
+
+		oTable.attachRowSelectionChange(function(oEvent) {
+			var currentRowContext = oEvent.getParameter("rowContext");
+			var Long = oModel.getProperty("LONG", currentRowContext);
+			var Lat = oModel.getProperty("LAT", currentRowContext);
+			setMarker(Lat, Long);
+		});
 
 		/*	function setMarkerLoop() {
 			for (var i = 0; i < Object.keys(aData).length; i++) {
