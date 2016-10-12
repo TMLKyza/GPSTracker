@@ -31,14 +31,10 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		/*var oModel;
 		oModel = new sap.ui.model.odata.ODataModel("https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/",false);
 		oModel.setHeaders({"content-type" : "application/json;charset=UTF-8"});*/
-<<<<<<< Upstream, based on 395ccf49e812e3a2848da279f8f795dc5383ae31
-		var sUrl = "/aziendasuperfiga/mainPKG/XS/Service/GPSTrack.xsodata/";
-		var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
-		sap.ui.getCore().setModel(oModel);
-=======
->>>>>>> face2b7 la mappa non va kappa
-		var marker;
+
+		
 		var map;
+		var oModel=oController.getoModel();
 		var oMat = new sap.ui.commons.TextView().bindProperty("text", "MAT");
 		var oLat = new sap.ui.commons.TextView().bindProperty("text", "LAT");
 		var oLong = new sap.ui.commons.TextView().bindProperty("text", "LONG");
@@ -52,6 +48,7 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			scrollwheel: true,
 			zoom: 8
 		});
+		var marker = new google.maps.Marker({map:null,position:null})
 		
 
 		var oTable = new sap.ui.table.Table({
@@ -103,35 +100,12 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 				position: oPosition,
 				map: map
 			});
-<<<<<<< Upstream, based on 395ccf49e812e3a2848da279f8f795dc5383ae31
 		}*/
-=======
-		}
-
-		*/
->>>>>>> face2b7 la mappa non va kappa
 		oTable.attachRowSelectionChange(function(oEvent) {
 			var currentRowContext = oEvent.getParameter("rowContext");
-<<<<<<< Upstream, based on 395ccf49e812e3a2848da279f8f795dc5383ae31
 			var long = oModel.getProperty("LONG", currentRowContext);
 			var lat = oModel.getProperty("LAT", currentRowContext);
 			oController.setMarker(lat, long, map, marker);
-=======
-			var Long = oController.oModel.getProperty("LONG", currentRowContext);
-			var Lat = oController.oModel.getProperty("LAT", currentRowContext);
-			map.setMarker(Lat, Long, map, marker);
->>>>>>> face2b7 la mappa non va kappa
-		});
-
-<<<<<<< Upstream, based on 395ccf49e812e3a2848da279f8f795dc5383ae31
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: {
-				lat: 45.4628328,
-				lng: 9.107692
-			},
-			scrollwheel: true,
-			zoom: 8
-
 		});
 		/*debugger;
 		var oData = new sap.ui.model.json.JSONModel();
@@ -148,18 +122,6 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			var lati = oModel[i].LAT;
 			oController.setMarker(lati, longi, map, marker);
 			debugger;
-=======
-		/*	function setMarkerLoop() {
-			for (var i = 0; i < Object.keys(aData).length; i++) {
-				longi = aData[i].LONG;
-				lati = aData[i].LAT;
-				setMarker(lati, longi);
-			}
-		}*//*
-		marker = new google.maps.Marker({position: null,
-    map: map});
-			setMarkerLoop();
->>>>>>> face2b7 la mappa non va kappa
 		}*/
 		/*marker = new google.maps.Marker({position: null,
     map: map});*/
