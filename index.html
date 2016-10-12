@@ -11,7 +11,7 @@
 				data-sap-ui-theme="sap_bluecrystal">
 		</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAwED3-dEhWpgbF1O5dydUeZXiNUcYcA4&callback=initMap" async defer></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAwED3-dEhWpgbF1O5dydUeZXiNUcYcA4" async defer></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript">
 		  /*=====================================================================
@@ -77,6 +77,11 @@
 	</head>
 	<body class="sapUiBody" role="application">
 		<div id="content"></div>
-		<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAwED3-dEhWpgbF1O5dydUeZXiNUcYcA4&callback=initMap" async defer></script>
+		<div id="map" heigth=300px></div>
+
+    		<!-- Section for service binding -->
+    		<script src="serviceBinding.js"></script>
+    		<script>
+    		</script>
 			--></body>
 </html>

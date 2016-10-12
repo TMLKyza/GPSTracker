@@ -1,0 +1,34 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="mainPKG.XS.Service">
+            <EntityType Name="GPSTrackType">
+                <Key>
+                    <PropertyRef Name="TIMESTAMP"/>
+                </Key>
+                <Property Name="TIMESTAMP" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="DATE" Type="Edm.DateTime"/>
+                <Property Name="MAT" Type="Edm.Int32"/>
+                <Property Name="LAT" Type="Edm.String" MaxLength="50"/>
+                <Property Name="LONG" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="Fattorini_AttiviType">
+                <Key>
+                    <PropertyRef Name="Matricola"/>
+                    <PropertyRef Name="Matricola"/>
+                </Key>
+                <Property Name="Matricola" Type="Edm.String" Nullable="false" MaxLength="2147483647"/>
+                <Property Name="Matricola" Type="Edm.Int32"/>
+                <Property Name="Nome" Type="Edm.String" MaxLength="255"/>
+            </EntityType>
+            <EntityContainer Name="GPSTrack" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="GPSTrack" EntityType="mainPKG.XS.Service.GPSTrackType"/>
+                <EntitySet Name="Fattorini_Attivi" EntityType="mainPKG.XS.Service.Fattorini_AttiviType"/>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

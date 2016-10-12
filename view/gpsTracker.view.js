@@ -19,19 +19,22 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 			]
 		});*/
 
-		var aData;
+		/*var aData;
 		jQuery.ajax({
 			type: "GET",
-			url: "https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/GPSTrack?$format=json",
+			url: "/aziendasuperfiga/mainPKG/XS/Service/GPSTrack.xsodata/GPSTrack?$format=json",
 			dataType: 'json',
 			async: false,
 			success: function(data) {
 				aData = data.d.results;
 			}
-		});
+		});*/
 		/*var oModel;
 		oModel = new sap.ui.model.odata.ODataModel("https://aziendasuperfigp1942218403tria.hanatrial.ondemand.com/mainPKG/XS/Service/GPSTrack.xsodata/",false);
 		oModel.setHeaders({"content-type" : "application/json;charset=UTF-8"});*/
+		var sUrl = "/aziendasuperfiga/mainPKG/XS/Service/GPSTrack.xsodata/";
+		var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+		sap.ui.getCore().setModel(oModel);
 		var map;
 		var marker;
 		var longi;
@@ -73,18 +76,18 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 		});
 		oTable.addColumn(oColumn3);
 
-		var oModel = new sap.ui.model.json.JSONModel();
-		oModel.setData({
+		//oModel = new sap.ui.model.json.JSONModel();
+		/*oModel.setData({
 			modelData: aData
-		});
+		});*/
 		oTable.setModel(oModel);
 
 		//oTable.setModel(oModel);
-		oTable.bindRows("/modelData");
+		oTable.bindRows("/GPSTrack");
 
 		oTable.sort(oTable.getColumns()[3]);
 
-		function setMarker(lat, long) {
+		/*	function setMarker(lat, long) {
 			var oPosition = new google.maps.LatLng(lat, long);
 			marker = new google.maps.Marker({
 				position: oPosition,
@@ -105,9 +108,8 @@ sap.ui.jsview("GPSTracker.view.gpsTracker", {
 				lati = aData[i].LAT;
 				setMarker(lati, longi);
 			}
-		}
+		}*/
 
-		function initMap() {
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: {
 					lat: 45.4628328,
